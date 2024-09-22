@@ -3,6 +3,7 @@ import {
 	type JobsOptions,
 	type Processor,
 	Queue,
+	type RepeatOptions,
 	Worker,
 	type WorkerOptions,
 } from "bullmq";
@@ -49,7 +50,16 @@ export class Job<GlobalInput = never> {
 	add(name: string, input: GlobalInput, options?: JobsOptions) {
 		return this.queue.add(name, input, options);
 	}
+
 	addBulk(jobs: { name: string; data: GlobalInput; opts?: JobsOptions }[]) {
 		return this.queue.addBulk(jobs);
+	}
+
+	async repeatable(data: GlobalInput, repeatable: RepeatOptions) {
+		await this.queue.add(this.name, data, {
+			repeat: { key: this.name, ...repeatable },
+		});
+
+		return this;
 	}
 }
