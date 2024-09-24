@@ -39,7 +39,15 @@ const job1 = defineJob("some")
         //       ^?
     });
 
-const job1 = await defineJob("some-cron")
+await job1.add(
+    "some",
+    { date: new Date().toISOString() },
+    {
+        delay: 5000,
+    }
+);
+
+const job2 = await defineJob("some-cron")
     .input<{ date: string }>()
     .options({
         limiter: {
