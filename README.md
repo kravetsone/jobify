@@ -3,12 +3,12 @@
 <div align="center">
 
 [![npm](https://img.shields.io/npm/v/jobify?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/jobify)
-[![JSR](https://jsr.io/badges/jobify)](https://jsr.io/jobify)
-[![JSR Score](https://jsr.io/badges/jobify/score)](https://jsr.io/jobify)
+[![JSR](https://jsr.io/badges/@kravets/jobify)](https://jsr.io/@kravets/jobify)
+[![JSR Score](https://jsr.io/badges/@kravets/jobify/score)](https://jsr.io/@kravets/jobify)
 
 </div>
 
-This library is aimed at helping to implement a Webhook server.
+Type-safe and much simpler wrapper for the [BullMQ](https://bullmq.io/) library.
 
 > [!WARNING]
 > This project is in the `MVP` state and the API may still change a lot. At the moment, the project fits the
@@ -38,4 +38,31 @@ const job1 = defineJob("some")
         console.log("running", job.data.date);
         //       ^?
     });
+
+const job1 = await defineJob("some-cron")
+    .input<{ date: string }>()
+    .options({
+        limiter: {
+            max: 10,
+            duration: 1000,
+        },
+    })
+    .action(async (job) => {
+        console.log("running", job.data.date);
+        //       ^?
+    })
+    // it will run every minute and will not be duplicated during reboots.
+    .repeatable(
+        { date: new Date().toISOString() },
+        {
+            pattern: "* * * * *",
+        }
+    );
 ```
+
+### TODO:
+
+-   maybe [pg-boss](https://github.com/timgit/pg-boss) adapter?
+-   hooks?
+-   make job title optional?
+-   guide with [bull-board](https://github.com/felixmosh/bull-board) and some improves for usage
