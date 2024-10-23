@@ -8,13 +8,15 @@ import {
 	type WorkerOptions,
 } from "bullmq";
 
+type OptionsData = Omit<WorkerOptions, "connection">;
+
 export class Job<GlobalInput = never> {
 	private connection: ConnectionOptions;
 	private name: string;
 	queue: Queue<GlobalInput>;
 	// TODO: depends on generic
 	worker!: Worker<GlobalInput>;
-	private optionsData?: Omit<WorkerOptions, "connection">;
+	private optionsData?: OptionsData;
 
 	constructor(connection: ConnectionOptions, jobName: string) {
 		this.connection = connection;
@@ -30,7 +32,7 @@ export class Job<GlobalInput = never> {
 		return this;
 	}
 
-	options(options: typeof this.optionsData) {
+	options(options: OptionsData) {
 		this.optionsData = options;
 
 		return this;
