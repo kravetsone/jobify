@@ -16,7 +16,7 @@ export interface DefinedJobsOptions {
 	queue?: Queue | NoConnection<QueueOptions>;
 }
 
-export class Job<GlobalInput = never> {
+export class Job<GlobalInput = undefined> {
 	private connection: ConnectionOptions;
 	private name: string;
 	queue: Queue<GlobalInput>;
