@@ -3,12 +3,18 @@ import {
 	type JobsOptions,
 	type Processor,
 	Queue,
+	type QueueOptions,
 	type RepeatOptions,
 	Worker,
 	type WorkerOptions,
 } from "bullmq";
+import type { NoConnection } from "./utils";
 
-type OptionsData = Omit<WorkerOptions, "connection">;
+type OptionsData = NoConnection<WorkerOptions>;
+
+export interface DefinedJobsOptions {
+	queue?: Queue | NoConnection<QueueOptions>;
+}
 
 export class Job<GlobalInput = never> {
 	private connection: ConnectionOptions;
@@ -18,13 +24,21 @@ export class Job<GlobalInput = never> {
 	worker!: Worker<GlobalInput>;
 	private optionsData?: OptionsData;
 
-	constructor(connection: ConnectionOptions, jobName: string) {
+	constructor(
+		connection: ConnectionOptions,
+		jobName: string,
+		options?: DefinedJobsOptions,
+	) {
 		this.connection = connection;
 		this.name = jobName;
 
-		this.queue = new Queue(jobName, {
-			connection,
-		});
+		this.queue =
+			options?.queue instanceof Queue
+				? options.queue
+				: new Queue(jobName, {
+						connection,
+						...options?.queue,
+					});
 	}
 
 	input<Input>(input?: Input): Job<Input> {

@@ -26,8 +26,15 @@ const redis = new IORedis({
 
 const defineJob = initJobify(redis);
 
-const job1 = defineJob("some")
+const job1 = defineJob("some", {
+    queue: {
+        defaultJobOptions: {
+            delay: 100,
+        },
+    },
+})
     .input<{ date: string }>()
+    // WORKER OPTIONS
     .options({
         limiter: {
             max: 10,

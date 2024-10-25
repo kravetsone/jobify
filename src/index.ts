@@ -1,8 +1,9 @@
-import { type ConnectionOptions, Queue } from "bullmq";
+import type { ConnectionOptions } from "bullmq";
 import { Job } from "define-job";
+import type { Shift } from "./utils";
 
 export function initJobify(connection: ConnectionOptions) {
-	return (name: string) => {
-		return new Job(connection, name);
+	return (...args: Shift<ConstructorParameters<typeof Job>>) => {
+		return new Job(connection, ...args);
 	};
 }
