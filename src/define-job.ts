@@ -71,10 +71,12 @@ export class Job<GlobalInput = undefined> {
 		return this.queue.addBulk(jobs);
 	}
 
-	async repeatable(data: GlobalInput, repeatable: RepeatOptions) {
-		await this.queue.add(this.name, data, {
-			repeat: { key: this.name, ...repeatable },
-		});
+	async repeatable(repeatable: RepeatOptions, template?: {
+		name?: string,
+		data?: GlobalInput,
+		opts?: Omit<JobsOptions, 'jobId' | 'repeat' | 'delay'>
+	}) {
+		await this.queue.upsertJobScheduler(this.name, repeatable, template);
 
 		return this;
 	}

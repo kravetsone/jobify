@@ -12,17 +12,18 @@
 	},
 	"description": "Right way to work with jobs",
 	"keywords": ["jobs", "queue", "bullmq", "bull", "pg-boss"],
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",
 		"@types/bun": "latest",
 		"ioredis": "^5.4.1",
 		"pkgroll": "^2.4.2",
-		"typescript": "^5.5.4"
+		"typescript": "^5.5.4",
+		"bullmq": "^5.25.6"
 	},
 	"peerDependencies": {
-		"bullmq": "^5.13.2"
+		"bullmq": "^5.25.6"
 	},
 	"scripts": {
 		"prepublishOnly": "bun test && bunx pkgroll"
