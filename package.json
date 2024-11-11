@@ -26,7 +26,7 @@
 		"bullmq": "^5.25.6"
 	},
 	"scripts": {
-		"prepublishOnly": "bun test && bunx pkgroll"
+		"prepublishOnly": "bun test && bunx pkgroll && bunx publint"
 	},
 	"files": ["dist"]
 }

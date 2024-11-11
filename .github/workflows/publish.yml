@@ -27,18 +27,6 @@ jobs:
             - name: Install modules
               run: bun install
 
-            - name: Install Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "20.x"
-                  registry-url: "https://registry.npmjs.org"
-
-            - name: Build package
-              run: bun run prepublishOnly
-
-            - name: Run publint
-              run: bunx publint
-
             - name: Publish package to NPM
               if: ${{ github.event.inputs.publish_to_npm }}
               run: bun publish --access public
