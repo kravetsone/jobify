@@ -1,5 +1,6 @@
-// TODO:
 import { describe, expect, it } from "bun:test";
+// TODO:
+import { Queue } from "bullmq";
 import { initJobify } from "index";
 import IORedis from "ioredis";
 
@@ -10,11 +11,7 @@ describe("test", () => {
 		const defineJob = initJobify(connection);
 
 		const job = defineJob("ok", {
-			queue: {
-				defaultJobOptions: {
-					delay: 100,
-				},
-			},
+			queue: new Queue("ok", { connection }),
 		});
 	});
 });

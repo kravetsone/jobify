@@ -32,6 +32,7 @@ export class Job<GlobalInput = undefined> {
 		this.connection = connection;
 		this.name = jobName;
 
+		// @ts-expect-error
 		this.queue =
 			options?.queue instanceof Queue
 				? options.queue
@@ -72,10 +73,12 @@ export class Job<GlobalInput = undefined> {
 	// additions
 
 	add(name: string, input: GlobalInput, options?: JobsOptions) {
+		// @ts-expect-error
 		return this.queue.add(name, input, options);
 	}
 
 	addBulk(jobs: { name: string; data: GlobalInput; opts?: JobsOptions }[]) {
+		// @ts-expect-error
 		return this.queue.addBulk(jobs);
 	}
 
@@ -87,6 +90,7 @@ export class Job<GlobalInput = undefined> {
 			opts?: Omit<JobsOptions, "jobId" | "repeat" | "delay">;
 		},
 	) {
+		// @ts-expect-error
 		await this.queue.upsertJobScheduler(this.name, repeatable, template);
 
 		return this;
