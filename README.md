@@ -67,13 +67,28 @@ const job2 = await defineJob("some-cron")
         //       ^?
     })
     // it will run every minute and will not be duplicated during reboots.
-    .repeatable(
-        { date: new Date().toISOString() },
-        {
-            pattern: "* * * * *",
-        }
-    );
+    .repeatable({
+        every: 60 * 1000,
+    });
 ```
+
+## Workers defaults
+
+We add some options by default to Workers
+
+```ts
+{
+    removeOnComplete: {
+		count: 20,
+	},
+	removeOnFail: {
+		age: 24 * 3600,
+		count: 1000,
+    }
+}
+```
+
+We add it because it recommended in [`going to production`](https://docs.bullmq.io/guide/going-to-production#auto-job-removal)
 
 ### TODO:
 

@@ -54,7 +54,15 @@ export class Job<GlobalInput = undefined> {
 
 	action(action: Processor<GlobalInput, any, string>) {
 		this.worker = new Worker(this.name, action, {
+			removeOnComplete: {
+				count: 20,
+			},
+			removeOnFail: {
+				age: 24 * 3600,
+				count: 1000,
+			},
 			...this.optionsData,
+
 			connection: this.connection,
 		});
 
@@ -71,11 +79,14 @@ export class Job<GlobalInput = undefined> {
 		return this.queue.addBulk(jobs);
 	}
 
-	async repeatable(repeatable: RepeatOptions, template?: {
-		name?: string,
-		data?: GlobalInput,
-		opts?: Omit<JobsOptions, 'jobId' | 'repeat' | 'delay'>
-	}) {
+	async repeatable(
+		repeatable: RepeatOptions,
+		template?: {
+			name?: string;
+			data?: GlobalInput;
+			opts?: Omit<JobsOptions, "jobId" | "repeat" | "delay">;
+		},
+	) {
 		await this.queue.upsertJobScheduler(this.name, repeatable, template);
 
 		return this;
