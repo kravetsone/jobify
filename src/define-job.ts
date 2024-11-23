@@ -84,14 +84,14 @@ export class Job<GlobalInput = undefined> {
 
 	async repeatable(
 		repeatable: RepeatOptions,
-		template?: {
-			name?: string;
-			data?: GlobalInput;
-			opts?: Omit<JobsOptions, "jobId" | "repeat" | "delay">;
-		},
+		data?: GlobalInput | undefined,
+		options?: JobsOptions,
 	) {
 		// @ts-expect-error
-		await this.queue.upsertJobScheduler(this.name, repeatable, template);
+		await this.queue.add(this.name, data, {
+			...options,
+			repeat: { key: this.name, ...repeatable },
+		});
 
 		return this;
 	}
