@@ -1,5 +1,5 @@
 import type { ConnectionOptions } from "bullmq";
-import { Job } from "define-job";
+import { Job } from "./define-job";
 import type { Shift } from "./utils";
 
 export function initJobify(connection: ConnectionOptions) {
