@@ -3,6 +3,7 @@
 <div align="center">
 
 [![npm](https://img.shields.io/npm/v/jobify?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/jobify)
+[![npm downloads](https://img.shields.io/npm/dw/jobify?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/jobify)
 [![JSR](https://jsr.io/badges/@kravets/jobify)](https://jsr.io/@kravets/jobify)
 [![JSR Score](https://jsr.io/badges/@kravets/jobify/score)](https://jsr.io/@kravets/jobify)
 
