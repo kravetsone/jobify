@@ -1,7 +1,10 @@
 {
 	"name": "@kravets/jobify",
 	"version": "0.0.3",
-	"exports": "./src/index.ts",
+	"exports": {
+		".": "./src/index.ts",
+		"./bullmq": "./src/bullmq-export.ts"
+	},
 	"publish": {
 		"include": ["deno.json", "src", "README.md", "LICENSE"]
 	},
