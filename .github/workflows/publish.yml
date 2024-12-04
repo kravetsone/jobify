@@ -27,6 +27,12 @@ jobs:
             - name: Install modules
               run: bun install
 
+            - name: Prepare to JSR publish
+              run: bun scripts/prepare-jsr.ts
+
+            - name: Publish package to JSR
+              run: bunx jsr publish --allow-dirty --allow-slow-types
+
             - name: Publish package to NPM
               run: bun publish --access public
               env:
