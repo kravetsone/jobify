@@ -17,7 +17,7 @@
 	},
 	"description": "Right way to work with jobs",
 	"keywords": ["jobs", "queue", "bullmq", "bull", "pg-boss"],
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"type": "module",
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
