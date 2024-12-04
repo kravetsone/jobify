@@ -1,8 +1,8 @@
 import { describe, expect, it } from "bun:test";
 // TODO:
 import { Queue } from "bullmq";
-import { initJobify } from "index";
 import IORedis from "ioredis";
+import { initJobify } from "../src/index.js";
 
 const connection = new IORedis({});
 

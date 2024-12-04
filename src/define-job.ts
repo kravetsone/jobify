@@ -8,7 +8,7 @@ import {
 	Worker,
 	type WorkerOptions,
 } from "bullmq";
-import type { NoConnection } from "./utils";
+import type { NoConnection } from "./utils.js";
 
 export type OptionsData = NoConnection<WorkerOptions>;
 

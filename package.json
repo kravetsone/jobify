@@ -8,6 +8,11 @@
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
+		},
+		"./bullmq": {
+			"types": "./dist/bullmq-export.d.ts",
+			"import": "./dist/bullmq-export.js",
+			"require": "./dist/bullmq-export.cjs"
 		}
 	},
 	"description": "Right way to work with jobs",
