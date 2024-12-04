@@ -10,7 +10,7 @@ import {
 } from "bullmq";
 import type { NoConnection } from "./utils";
 
-type OptionsData = NoConnection<WorkerOptions>;
+export type OptionsData = NoConnection<WorkerOptions>;
 
 export interface DefinedJobsOptions {
 	queue?: Queue | NoConnection<QueueOptions>;
