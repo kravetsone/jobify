@@ -57,12 +57,6 @@ await job1.add(
 
 const job2 = await defineJob("some-cron")
     .input<{ date: string }>()
-    .options({
-        limiter: {
-            max: 10,
-            duration: 1000,
-        },
-    })
     .action(async (job) => {
         console.log("running", job.data.date);
         //       ^?
